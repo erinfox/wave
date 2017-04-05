@@ -18,14 +18,14 @@ VALUES
 
 
 INSERT INTO surfers
-  (name, skill_level, board_type, favorite_break_id)
+  (name, skill_level, board_type, favorite_break_id, zipcode)
 VALUES
-  ('Kelly Slater', 5, 'shortboard', 5 ),
-  ('John John Florence', 5, 'shortboard', 7),
-  ('Kelia Moniz', 5, 'longboard', 1),
-  ('Coco Ho', 5, 'shortboard', 2),
-  ('Bruna Shmitz', 5, 'shortboard', 2),
-  ('Malia Manuel', 5, 'shortboard', 9);
+  ('Kelly Slater', 5, 'shortboard', 5, 96712 ),
+  ('John John Florence', 5, 'shortboard', 7, 96712),
+  ('Kelia Moniz', 5, 'longboard', 1, 96712),
+  ('Coco Ho', 5, 'shortboard', 2, 96712),
+  ('Bruna Shmitz', 5, 'shortboard', 2, 96712),
+  ('Malia Manuel', 5, 'shortboard', 9, 96712);
 
 
 

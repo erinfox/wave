@@ -18,19 +18,22 @@
 
 
 
-<!-- POST TO ADD NEW WAVE_BREAK -->
+<!-- POST, ADD NEW WAVE_BREAK -->
 <form action = '/wave_break' method = 'post'>
 <br>
 New Surf Spot: <input type = 'text' name = 'break_location'>
 <br>
 Difficulty Level: <input type = 'integer' name = 'difficult_level'>
 <br>
-Is the Reef Dangerous? : <input type = 'boolean' name = 'rough_reef'>
+
+Is the Reef Dangerous?:
+<select type 'submit' name = 'rough_reef'>
+<option value = 'true'>True</option>
+<option value = 'false'>False</option>
+</select>
+
 <br>
 <button type='submit'>Submit</button>
-
-
-
 </form>
 
 
