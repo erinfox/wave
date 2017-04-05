@@ -22,10 +22,88 @@ app.listen(3000, function(){
 let db = pgp("postgres://erinfox@localhost:5432/wave_db")
 
 
+//*************** "HOME" PAGE ****************//
+app.get('/', function(req, res){
+  res.render("index");
+}) //.get
+
+//*************** SURFERS PAGE ****************//
+
+app.get('/surfers', function(req, res){
+  db
+    .any("SELECT * FROM surfers")
+    .then(function(data){
+      console.log(data)
+
+      let view_data = {
+        surfers: data
+      }//view_data
+       res.render("surfers/index", view_data);
+    });//.then
+}); //app.get
+
+//*************** INDIVIDUAL SURFER PAGE ****************//
+
+app.get('/surfers/:id', function(req, res){
+        let id = req.params.id
+
+  db
+    .one("SELECT * FROM surfers WHERE id = " + id)
+    .then(function(data){
+      // console.log(data)
+      let view_data = {
+        surfers: data
+      }//view_data
+       res.render("surfers/show", view_data);
+    });//.then
+}); //app.get
+
+//*************** WAVE_BREAK PAGE ****************//
+
+app.get('/wave_break', function(req, res){
+  db
+    .any("SELECT * FROM wave_break")
+    .then(function(data){
+      let view_data = {
+        wave_break: data
+      }//view_data
+       res.render("wave_break/index", view_data);
+    });//.then
+}); //app.get
 
 
 
 
+// ----entering in new wave_break spot-------//
+
+app.post('/wave_break', function(req, res){
+  break_location = req.body.break_location
+  difficult_level = req.body.difficult_level
+  rough_reef = req.body.rough_reef
+
+  db
+    .one ("INSERT INTO wave_break(break_location, difficult_level, rough_reef) VALUES($1, $2, $3) returning id",
+      [break_location, difficult_level, rough_reef])
+    .then (data =>{
+      console.log(data.id); //print new user id
+      res.redirect('/wave_break/' + data.id)
+    }); //.then
+}); //app.post
+
+
+//*************** INDIVIDUAL WAVE_BREAK PAGE ****************//
+app.get('/wave_break/:id', function(req, res){
+        let id = req.params.id
+  db
+    .one("SELECT * FROM wave_break WHERE id = " + id)
+    .then(function(data){
+      console.log(data)
+      let view_data = {
+        wave_break: data
+      }//view_data
+       res.render("wave_break/show", view_data);
+    })//.then
+}) //app.get
 
 
 

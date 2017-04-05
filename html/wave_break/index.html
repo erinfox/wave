@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+</head>
+<body>
+
+<h3>THIS IS THE LIST OF WAVE_BREAKS PAGE (INDEX)</h3>
+
+{{#wave_break}}
+<a href="/wave_break/{{ id }}">{{ break_location }}</a>
+<br>
+{{/wave_break}}
+ <br>
+
+
+
+<!-- POST TO ADD NEW WAVE_BREAK -->
+<form action = '/wave_break' method = 'post'>
+<br>
+New Surf Spot: <input type = 'text' name = 'break_location'>
+<br>
+Difficulty Level: <input type = 'integer' name = 'difficult_level'>
+<br>
+Is the Reef Dangerous? : <input type = 'boolean' name = 'rough_reef'>
+<br>
+<button type='submit'>Submit</button>
+
+
+
+</form>
+
+
+
+
+
+</body>
+</html>

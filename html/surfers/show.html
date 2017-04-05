@@ -8,5 +8,24 @@
 </head>
 <body>
 
+<h3>THIS IS THE LIST OF SURFERS PAGE (show)</h3>
+
+<div class = "surfer">
+
+    {{#surfers}}
+    <h1>{{ name }}
+    <br>
+    Skill Level: {{ skill_level }}
+    <br>
+    Board Type: {{ board_type }}
+    <br>
+    Favorite Break: {{favorite_break_id}}</h1>
+
+    {{/surfers}}
+  </div>
+
+
+
+
 </body>
 </html>
