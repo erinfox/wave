@@ -12,6 +12,28 @@
 <h3>THIS IS THE HOME PAGE</h3>
 
 
+<form class='Log In' action= '/login' method ='post'>
+{{#logged_in}}
+<h2>YOU ARE LOGGED IN {{email}}</h2>
+{{/logged_in}}
+
+
+  <fieldset>
+    <legend>Log In</legend>
+
+
+    <label for='inputEmail' class='inputEmail'> Email: </label>
+    <input name="email" type="text" class="email" placeholder="Email">
+
+    <label for="inputPassword" class="inputPassword">Password</label>
+    <input name="password" type="password" placeholder="Password">
+
+
+    <button type="submit" class="btn">Log in</button>
+  </fieldset>
+</form>
+
+<a href ='/sign_up'> Sign up HERE </a>
 
 </body>
 </html>

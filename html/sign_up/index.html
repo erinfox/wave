@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+</head>
+<body>
+
+<!-- sign up page/form -->
+<h3>THIS IS THE sign up</h3>
+
+<form class='sign_up' action='/sign_up' method ='post'>
+
+  <fieldset>
+    <legend>Sign Up</legend>
+
+    <label for='inputName' class='inputName'> Name: </label>
+    <input name="name" type="text" class="name" placeholder="Name">
+    <br>
+
+    <label for="board_type" class="board_type">Type of Board</label>
+<!--     <input name="board_type" type="text" placeholder="Board Type">
+ -->    <br>
+
+    <label for="skill_level" class="skill_level">Level of Surf Skills</label>
+    <select  type 'integer' name = 'skill_level'>
+    <option value = '1'> Beginner Waves</option>
+    <option value = '2'> Advanced Beginner Waves</option>
+    <option value = '3'> Advanced Waves</option>
+    <option value = '4'> Black Diamond Waves</option>
+    <option value = '5'> You might die out there waves</option>
+    </select>
+    <br>
+
+  <label for="favorite_wave_break_id" class="favorite_wave_break_id">Favorite Surf Break</label>
+
+  <select name="id" type="text">
+  {{#waves}}
+    <option value="{{id}}">{{break_location}}</option>
+  {{/waves}}
+
+ </select>
+
+<br>
+
+    <label for='inputEmail' class='inputEmail'> Email: </label>
+    <input name="email" type="text" class="email" placeholder="Email">
+    <br>
+    <label for="inputPassword" class="inputPassword">Password</label>
+    <input name="password" type="password" placeholder="Password">
+    <br>
+
+    <button type="submit" class="btn">Join!</button>
+  </fieldset>
+</form>
+
+<a href ='/'> Login in Here! </a>
+
+
+
+
+</body>
+</html>

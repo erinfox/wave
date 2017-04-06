@@ -22,10 +22,98 @@ app.listen(3000, function(){
 let db = pgp("postgres://erinfox@localhost:5432/wave_db")
 
 
+
+
+//*************************START SESSION******************
+app.use(session({
+  secret: 'wavezzz',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
+
+app.get('/', function(req, res){
+  if (req.session.user){
+    //user is logged in
+    let data = {
+      "logged_in": true,
+      "email": req.session.user.email
+    } //data
+    res.render('index', data);
+  } else {
+    //user is not logged in
+    res.render('index');
+  } //else
+}); //app.get
+
 //*************** "HOME" PAGE ****************//
 app.get('/', function(req, res){
   res.render("index");
 }) //.get
+
+//**********************LOG IN********************
+app.post('/login', function(req, res){
+  let data = req.body;
+  let error = 'Oops! Invalid email/password.';
+
+  db
+    .one('SELECT * FROM surfers WHERE email = $1', [data.email])
+    .catch(function(){
+      res.send(error);
+      //means user is not in the db
+
+    })
+    .then(function(user){
+      bcrypt
+        .compare(data.password, user.password, function(err, cmp){
+          if(cmp){
+            req.session.user = user;
+            res.redirect("/surfers");
+            //create a session
+          } else {
+            res.send(error);
+          } //else
+        }); //compare
+    }); //.then
+}); //.post
+
+
+
+
+
+//**********************SIGN UP********************
+app.get('/sign_up', function(req, res){
+  // res.render('sign_up/index');
+  db
+    .any("SELECT * FROM wave_break")
+    .then(function(data){
+      console.log(data)
+      let view_data = {
+        waves: data,
+      }
+      res.render('sign_up/index', view_data);
+    })
+});
+
+app.post('/sign_up', function(req, res){
+  let data = req.body;
+  // console.log(data)
+
+  bcrypt
+    .hash(data.password, 10, function(err,hash){
+       db
+      .none('INSERT INTO surfers(name, skill_level, favorite_break_id, email, password) VALUES($1,$2,$3,$4,$5)',
+        [data.name, data.skill_level, data.favorite_break_id, data.email,hash])
+       .then(function(){
+        res.redirect('/surfers')
+       }) //.then
+    }) //.hash
+    }); //.post
+
+
+
+
+
 
 //*************** SURFERS PAGE ****************//
 
@@ -33,7 +121,7 @@ app.get('/surfers', function(req, res){
   db
     .any("SELECT * FROM surfers")
     .then(function(data){
-      console.log(data)
+      // console.log(data)
 
       let view_data = {
         surfers: data
@@ -85,7 +173,7 @@ app.post('/wave_break', function(req, res){
     .one ("INSERT INTO wave_break(break_location, difficult_level, rough_reef) VALUES($1, $2, $3) returning id",
       [break_location, difficult_level, rough_reef])
     .then (data =>{
-      console.log(data.id); //print new user id
+      // console.log(data.id); //print new user id
       res.redirect('/wave_break/' + data.id)
     }); //.then
 }); //app.post
@@ -97,7 +185,7 @@ app.get('/wave_break/:id', function(req, res){
   db
     .one("SELECT * FROM wave_break WHERE id = " + id)
     .then(function(data){
-      console.log(data)
+      // console.log(data)
       let view_data = {
         wave_break: data
       }//view_data

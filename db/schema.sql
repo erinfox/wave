@@ -17,7 +17,8 @@ CREATE TABLE surfers (
   skill_level INTEGER,
   board_type VARCHAR(50),
   favorite_break_id INTEGER REFERENCES wave_break(id),
-  zipcode INTEGER
+  email VARCHAR(50),
+  password VARCHAR(255)
 );
 
 
