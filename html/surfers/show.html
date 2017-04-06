@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title></title>
-  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="/css/materialize.css">
+  <link rel="stylesheet" href="/css/materialize.min.css">
 </head>
 <body>
 
@@ -23,6 +24,18 @@
 
     {{/surfers}}
   </div>
+
+
+
+
+
+<form class="form-horizontal" action="/user?_method=PUT" method="POST">
+<input name ="board_type" type="text" value="{{board_type}}">
+<input type="hidden" value="{{#surfers}}{{id}}{{/surfers}}" name="surfer_id">
+ <button type="submit" class="btn">Update</button>
+
+</form>
+
 
 
 

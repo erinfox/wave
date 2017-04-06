@@ -4,6 +4,8 @@ let mustacheExpress = require("mustache-express");
 let bodyParser = require("body-parser");
 let pgp = require("pg-promise")();
 let session = require('express-session');
+let methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 
 const bcrypt = require('bcrypt');
 const salt = bcrypt.genSalt(10);
@@ -87,7 +89,7 @@ app.get('/sign_up', function(req, res){
   db
     .any("SELECT * FROM wave_break")
     .then(function(data){
-      console.log(data)
+      // console.log(data)
       let view_data = {
         waves: data,
       }
@@ -95,9 +97,11 @@ app.get('/sign_up', function(req, res){
     })
 });
 
+
+
 app.post('/sign_up', function(req, res){
   let data = req.body;
-  // console.log(data)
+      console.log(data)
 
   bcrypt
     .hash(data.password, 10, function(err,hash){
@@ -130,7 +134,7 @@ app.get('/surfers', function(req, res){
     });//.then
 }); //app.get
 
-//*************** INDIVIDUAL SURFER PAGE ****************//
+//*************** SURFER/:ID ****************//
 
 app.get('/surfers/:id', function(req, res){
         let id = req.params.id
@@ -145,6 +149,28 @@ app.get('/surfers/:id', function(req, res){
        res.render("surfers/show", view_data);
     });//.then
 }); //app.get
+
+
+
+
+
+//*************** UPDATE SURFER INFO ****************//
+// using METHOD OVERRIDE
+app.put("/user", function(req,res){
+  console.log(parseInt(req.body.surfer_id))
+  db
+  .none("UPDATE surfers SET board_type = $1 WHERE id = $2", [req.body.board_type, parseInt(req.body.surfer_id)])
+  .catch(function(){
+    res.send("fail")
+  })
+  .then(function(){
+     // console.log(req.body) 
+    res.redirect("/surfers/"+req.body.surfer_id)
+  });
+});
+
+
+
 
 //*************** WAVE_BREAK PAGE ****************//
 
@@ -195,78 +221,13 @@ app.get('/wave_break/:id', function(req, res){
 
 
 
+//*************** LOG OUT/ END SESSION ****************//
+app.get('/logout', function(req, res){
+  req.session.user = false;
+  res.redirect("/");
+});
 
 
-
-
-
-
-
-
-
-
-
-
-
-//*************************START SESSION******************
-// app.use(session({
-//   secret: 'wavezzz',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: false }
-// }))
-
-//**********************LOG IN********************
-// app.post('/login', function(req, res){
-//   let data = req.body;
-//   db
-//     .one ('SELECT * FROM users WHERE EMAIL = $1', [data.email])
-//     .catch(function(){
-//       res.send("Authrization Failed: Invalid Email/Password");
-//       //means user is not in the db
-//     })
-//     .then(function(user){
-//       bcrypt
-//         .compare(data.password, user.password_digest, function(err, cmp){
-//           if(cmp){
-//             req.session.user = user; //true
-//             res.redirect("/");
-//             //create a session
-//           } else {
-//             res.send("Authrization Failed: Invalid Email/Password");
-//           } //else
-//         }) //compare
-//     }) //.then
-// }); //.post
-
-
-
-//**********************SIGN UP********************
-// app.get('/signup', function(req, res){
-//   res.render('signup/index');
-// });
-
-// app.post('/signup', function(req, res){
-//   let data = req.body;
-
-
-//   bcrypt
-//     .hash(data.password, 10, function(err,hash){
-//        db
-//       .none('INSERT INTO users(email, password_digest) VALUES($1,$2)',
-//         [data.email,hash])
-//        .then(function(){
-//         res.send('User Created!')
-//        }) //.then
-//     }) //.hash
-//     }); //.post
-
-
-// //**********************LOG OUT********************
-// app.get('/logout', function(req, res){
-//   req.session.user = false;
-//   res.redirect("/");
-// }); //. logout
 
 
 

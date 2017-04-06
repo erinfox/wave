@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title></title>
-  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="/css/materialize.css">
+  <link rel="stylesheet" href="/css/materialize.min.css">
 </head>
 <body>
 
@@ -20,12 +21,8 @@
     <input name="name" type="text" class="name" placeholder="Name">
     <br>
 
-    <label for="board_type" class="board_type">Type of Board</label>
-<!--     <input name="board_type" type="text" placeholder="Board Type">
- -->    <br>
-
     <label for="skill_level" class="skill_level">Level of Surf Skills</label>
-    <select  type 'integer' name = 'skill_level'>
+    <select name='skill_level'>
     <option value = '1'> Beginner Waves</option>
     <option value = '2'> Advanced Beginner Waves</option>
     <option value = '3'> Advanced Waves</option>
@@ -36,13 +33,12 @@
 
   <label for="favorite_wave_break_id" class="favorite_wave_break_id">Favorite Surf Break</label>
 
-  <select name="id" type="text">
+  <select name="favorite_break_id">
   {{#waves}}
     <option value="{{id}}">{{break_location}}</option>
   {{/waves}}
 
- </select>
-
+  </select>
 <br>
 
     <label for='inputEmail' class='inputEmail'> Email: </label>
