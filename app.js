@@ -146,6 +146,13 @@ app.get('/surfers/:id', function(req, res){
     .then(function(data){
       console.log(data)
       let view_data = {
+        id:data.id,
+        name: data.name,
+        skill_level: data.skill_level,
+        board_type: data.board_type,
+        favorite_break_id: data.favorite_break_id,
+        email: data.email,
+        password: data.password,
         surfers: data
       }//view_data
        res.render("surfers/show", view_data);
@@ -272,6 +279,19 @@ app.get('/wave_break/:id', function(req, res){
        res.render("wave_break/show", view_data);
     })//.then
 }) //app.get
+
+
+//*************** DELETE SURFER ****************//
+app.get('/delete/:id', function(req, res){
+  let id = req.params.id
+  console.log(id)
+  db
+  .none ('DELETE FROM surfers WHERE id = $1', [id]);
+  res.redirect("/surfers");
+});
+
+
+
 
 
 

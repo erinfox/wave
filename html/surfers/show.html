@@ -10,7 +10,7 @@
 <body>
 
 
-
+{{id}}
 <div class = "surfer">
 
     {{#surfers}}
@@ -57,9 +57,12 @@
   {{/waves}}
   </select>
   <button type="submit" class="btn">Update Favorite Break </button>
+<br>
 
+<a href="/delete/{{ id }}"> Delete Account</a>
 
 <br>
+
 <a href="/logout"> Logout </a>
 
 <script src= "/js/jquery.js"> </script>
