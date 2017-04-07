@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h3>THIS IS THE LIST OF SURFERS PAGE (show)</h3>
+
 
 <div class = "surfer">
 
@@ -20,25 +20,49 @@
     <br>
     Board Type: {{ board_type }}
     <br>
-    Favorite Break: {{favorite_break_id}}</h1>
+    <h2 id = "favBreak" Favorite Break:> Favorite Break: {{favorite_break_id}}</h2>
 
     {{/surfers}}
   </div>
 
 
+<p>Update Your Board: </p>
+    <form class="form-horizontal" action="/user?_method=PUT" method="POST">
+    <input name ="board_type" type="text" value="{{board_type}}" placeholder="I will be surfing on a...">
+    <input type="hidden" value="{{#surfers}}{{id}}{{/surfers}}" name="surfer_id">
+     <button type="submit" class="btn">Update Board</button>
+    </form>
 
 
+<p>Update Your Skill Level: </p>
+    <form class="skillLevel" action="/user1?_method=PUT" method="POST">
+    <select name='skill_level' value = "{{skill_level}}">
+    <option value = '1'> Beginner Waves</option>
+    <option value = '2'> Advanced Beginner Waves</option>
+    <option value = '3'> Advanced Waves</option>
+    <option value = '4'> Black Diamond Waves</option>
+    <option value = '5'> You might die out there waves</option>
+    </select>
+    <input type="hidden" value="{{#surfers}}{{id}}{{/surfers}}" name="surfer_id_again">
 
-<form class="form-horizontal" action="/user?_method=PUT" method="POST">
-<input name ="board_type" type="text" value="{{board_type}}">
-<input type="hidden" value="{{#surfers}}{{id}}{{/surfers}}" name="surfer_id">
- <button type="submit" class="btn">Update</button>
+<button type="submit" class="btn">Update Skill Level</button>
+<br>
+<br>
 
-</form>
+<label for="favorite_wave_break_id" class="favorite_wave_break_id"> Update Surf Location: </label>
+
+  <select name="favorite_break_id">
+  {{#waves}}
+    <option value="{{id}}">{{break_location}}</option>
+  {{/waves}}
+  </select>
+  <button type="submit" class="btn">Update Favorite Break </button>
 
 
+<br>
+<a href="/logout"> Logout </a>
 
-
-
+<script src= "/js/jquery.js"> </script>
+<script src= "/js/script.js"> </script>
 </body>
 </html>

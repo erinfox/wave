@@ -5,6 +5,8 @@ let bodyParser = require("body-parser");
 let pgp = require("pg-promise")();
 let session = require('express-session');
 let methodOverride = require('method-override');
+let axios = require('axios');
+let config = require('./config');
 app.use(methodOverride('_method'));
 
 const bcrypt = require('bcrypt');
@@ -13,7 +15,7 @@ const salt = bcrypt.genSalt(10);
 app.engine("html", mustacheExpress());
 app.set("view engine", "html");
 app.set("views", __dirname + "/html");
-app.use("/", express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
@@ -142,7 +144,7 @@ app.get('/surfers/:id', function(req, res){
   db
     .one("SELECT * FROM surfers WHERE id = " + id)
     .then(function(data){
-      // console.log(data)
+      console.log(data)
       let view_data = {
         surfers: data
       }//view_data
@@ -151,21 +153,73 @@ app.get('/surfers/:id', function(req, res){
 }); //app.get
 
 
+//*************** API CALL FOR EACH SURFER PROFILE ****************//
+
+app.get('/api/:location_id', function(req, res){
+
+  let id = req.params.location_id;
+
+  db.one('SELECT * FROM wave_break WHERE id = $1', id)
+  .then(function(data){
+
+  let lat = 8.834;
+  let long = 2.3394;
+
+  let url = "https://api.worldweatheronline.com/premium/v1/marine.ashx?q=" + lat +","+ long +"&key="+config.key+"&format=json";
+
+    axios.get(url)
+    .then(function(response){
+      res.send(response.data.data.weather)
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+
+  })
+
+}) //app.get
 
 
 
-//*************** UPDATE SURFER INFO ****************//
+
+
+
+
+
+
+//*************** UPDATE SURFER BOARD TYPE ****************//
 // using METHOD OVERRIDE
 app.put("/user", function(req,res){
   console.log(parseInt(req.body.surfer_id))
   db
   .none("UPDATE surfers SET board_type = $1 WHERE id = $2", [req.body.board_type, parseInt(req.body.surfer_id)])
-  .catch(function(){
-    res.send("fail")
-  })
   .then(function(){
      // console.log(req.body) 
-    res.redirect("/surfers/"+req.body.surfer_id)
+    res.redirect("/surfers/" + req.body.surfer_id)
+  })
+  .catch(function(){
+    res.send("fail")
+  });
+});
+
+
+
+//*************** UPDATE SURFER SKILL LEVEL ****************//
+// using METHOD OVERRIDE
+app.put("/user1", function(req,res){
+  console.log(req.body)
+  console.log(req.body.skill_level)
+  console.log(req.body.id)
+  console.log("params")
+  console.log(req.params.id)
+  db
+  .none("UPDATE surfers SET skill_level = $1 WHERE id = $2", [Number(req.body.skill_level), parseInt(req.body.surfer_id_again)])
+  .then(function(){
+     // console.log(req.body) 
+    res.redirect("/surfers/" + req.body.surfer_id_again)
+  })
+   .catch(function(){
+    res.send("fail")
   });
 });
 

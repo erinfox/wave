@@ -23,3 +23,10 @@ https://www.programmableweb.com/api/marinesurfing-weather
 
 
 WorldWeatherOnline.com
+
+
+
+to do 
+-api 
+-make break_id say actual break name instead of the number 
+-delete a "surfer"/user 
