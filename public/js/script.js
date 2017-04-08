@@ -1,28 +1,28 @@
-$(document).ready(function(){
+// $(document).ready(function(){
 
 
-let favorite_break = $('#favBreak').text().split(':')[1].replace(/\s/g, '');
+// let favorite_break = $('#favBreak').text().split(':')[1].replace(/\s/g, '');
 
-console.log(favorite_break)
-
-
-var getBreakInfo = function(favorite_break){
-
- $.ajax({
-      url: "/api/" + favorite_break,
-      method: "GET",
-      success: function(response){
-        console.log(response);
-      } // success
-    }); //ajax
+// console.log(favorite_break)
 
 
-}; // getBreakInfo
-getBreakInfo(favorite_break);
+// var getBreakInfo = function(favorite_break){
+
+//  $.ajax({
+//       url: "/api/" + favorite_break,
+//       method: "GET",
+//       success: function(response){
+//         console.log(response);
+//       } // success
+//     }); //ajax
+
+
+// }; // getBreakInfo
+// getBreakInfo(favorite_break);
 
 
 
 
-}); //ends doc.ready
+// }); //ends doc.ready
 
 

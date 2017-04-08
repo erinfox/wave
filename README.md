@@ -30,3 +30,15 @@ to do
 -api 
 -make break_id say actual break name instead of the number 
 -delete a "surfer"/user 
+
+
+4/8 TO DO 
+-fix update.. it is updating random surfers 
+-fix update.. it is changing intput to a number and displaying it 
+-make it pretty 
+-GET AN API 
+
+
+
+
+SELECT surfers.favorite_break_id, surfers.name, wave_break.break_location FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id;

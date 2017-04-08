@@ -4,13 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title></title>
-  <link rel="stylesheet" href="/css/materialize.css">
-  <link rel="stylesheet" href="/css/materialize.min.css">
+<!--   <link rel="stylesheet" href="/css/materialize.css"> -->
 </head>
 <body>
 
 
-{{id}}
+
 <div class = "surfer">
 
     {{#surfers}}
@@ -20,22 +19,25 @@
     <br>
     Board Type: {{ board_type }}
     <br>
-    <h2 id = "favBreak" Favorite Break:> Favorite Break: {{favorite_break_id}}</h2>
-
+    <h2 id = "favBreak"> Favorite Break: {{break_location}}</h2>
     {{/surfers}}
   </div>
 
+{{#surfers}}
+  {{person_id}}
+  {{skill_level}}
+  {{break_location}}
 
 <p>Update Your Board: </p>
-    <form class="form-horizontal" action="/user?_method=PUT" method="POST">
-    <input name ="board_type" type="text" value="{{board_type}}" placeholder="I will be surfing on a...">
-    <input type="hidden" value="{{#surfers}}{{id}}{{/surfers}}" name="surfer_id">
+    <form class="form-horizontal" action="/user/{{person_id}}?_method=PUT" method="POST">
+    <input name ="board_type" type="text"  placeholder="I will be surfing on a...">
+    <input type="hidden" value="{{#surfers}}{{person_id}}{{/surfers}}" name="changeSurferBoard">
      <button type="submit" class="btn">Update Board</button>
     </form>
 
 
 <p>Update Your Skill Level: </p>
-    <form class="skillLevel" action="/user1?_method=PUT" method="POST">
+    <form class="skillLevel" action="/user1/{{person_id}}?_method=PUT" method="POST">
     <select name='skill_level' value = "{{skill_level}}">
     <option value = '1'> Beginner Waves</option>
     <option value = '2'> Advanced Beginner Waves</option>
@@ -43,7 +45,7 @@
     <option value = '4'> Black Diamond Waves</option>
     <option value = '5'> You might die out there waves</option>
     </select>
-    <input type="hidden" value="{{#surfers}}{{id}}{{/surfers}}" name="surfer_id_again">
+   <input type="hidden" value="{{#surfers}}{{id}}{{/surfers}}" name="surfer_id_again">
 
 <button type="submit" class="btn">Update Skill Level</button>
 <br>
@@ -58,6 +60,7 @@
   </select>
   <button type="submit" class="btn">Update Favorite Break </button>
 <br>
+{{/surfers}}
 
 <a href="/delete/{{ id }}"> Delete Account</a>
 

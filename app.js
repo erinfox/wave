@@ -139,13 +139,20 @@ app.get('/surfers', function(req, res){
 //*************** SURFER/:ID ****************//
 
 app.get('/surfers/:id', function(req, res){
-        let id = req.params.id
+  let id = req.params.id
+  // console.log(req.params) //this is consoling the right id
 
   db
-    .one("SELECT * FROM surfers WHERE id = " + id)
+    .one("SELECT surfers.id AS person_id, name, skill_level,board_type, favorite_break_id, email, wave_break.break_location  FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id WHERE surfers.id = $1",[id])
+
+    // .one('SELECT surfers.favorite_break_id, wave_break.break_location FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id = $1',[1])
+
+    // .one('SELECT surfers.favorite_break_id, surfers.name, wave_break.break_location FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id = $1',[1])
+
     .then(function(data){
-      console.log(data)
+      // console.log(data)
       let view_data = {
+        show:data,
         id:data.id,
         name: data.name,
         skill_level: data.skill_level,
@@ -160,34 +167,35 @@ app.get('/surfers/:id', function(req, res){
 }); //app.get
 
 
+
+
+
+
 //*************** API CALL FOR EACH SURFER PROFILE ****************//
 
-app.get('/api/:location_id', function(req, res){
+// app.get('/api/:location_id', function(req, res){
 
-  let id = req.params.location_id;
+//   let id = req.params.location_id;
 
-  db.one('SELECT * FROM wave_break WHERE id = $1', id)
-  .then(function(data){
+//   db.one('SELECT * FROM wave_break WHERE id = $1', id)
+//   .then(function(data){
 
-  let lat = 8.834;
-  let long = 2.3394;
+//   let lat = 8.834;
+//   let long = 2.3394;
 
-  let url = "https://api.worldweatheronline.com/premium/v1/marine.ashx?q=" + lat +","+ long +"&key="+config.key+"&format=json";
+//   let url = "https://api.worldweatheronline.com/premium/v1/marine.ashx?q=" + lat +","+ long +"&key="+config.key+"&format=json";
 
-    axios.get(url)
-    .then(function(response){
-      res.send(response.data.data.weather)
-    })
-    .catch(function(err){
-      console.log(err);
-    })
+//     axios.get(url)
+//     .then(function(response){
+//       res.send(response.data.data.weather)
+//     })
+//     .catch(function(err){
+//       console.log(err);
+//     })
 
-  })
+//   })
 
-}) //app.get
-
-
-
+// }) //app.get
 
 
 
@@ -196,16 +204,22 @@ app.get('/api/:location_id', function(req, res){
 
 //*************** UPDATE SURFER BOARD TYPE ****************//
 // using METHOD OVERRIDE
-app.put("/user", function(req,res){
-  console.log(parseInt(req.body.surfer_id))
+app.put("/user/:id", function(req,res){
+  id = req.params.id
+  // console.log(id)
+  // console.log(req.params)
+  // console.log(req.body)
+  // console.log(parseInt(req.body.changeSurferBoard))
   db
-  .none("UPDATE surfers SET board_type = $1 WHERE id = $2", [req.body.board_type, parseInt(req.body.surfer_id)])
+  .none("UPDATE surfers SET board_type = $1 WHERE id = $2",
+    [req.body.board_type, id])
   .then(function(){
      // console.log(req.body) 
-    res.redirect("/surfers/" + req.body.surfer_id)
+    res.redirect("/surfers/" + id)
   })
   .catch(function(){
     res.send("fail")
+
   });
 });
 
@@ -213,17 +227,19 @@ app.put("/user", function(req,res){
 
 //*************** UPDATE SURFER SKILL LEVEL ****************//
 // using METHOD OVERRIDE
-app.put("/user1", function(req,res){
-  console.log(req.body)
-  console.log(req.body.skill_level)
-  console.log(req.body.id)
-  console.log("params")
-  console.log(req.params.id)
+app.put("/user1/:id", function(req,res){
+  id = req.params.id
+  // console.log(req.body)
+  // console.log(req.body.skill_level)
+  // console.log(req.body.id)
+  // console.log("params")
+  // console.log(req.params.id)
   db
-  .none("UPDATE surfers SET skill_level = $1 WHERE id = $2", [Number(req.body.skill_level), parseInt(req.body.surfer_id_again)])
+  .none("UPDATE surfers SET skill_level = $1 WHERE id = $2",
+    [Number(req.body.skill_level), parseInt(req.body.surfer_id_again)])
   .then(function(){
      // console.log(req.body) 
-    res.redirect("/surfers/" + req.body.surfer_id_again)
+    res.redirect("/surfers/" + id)
   })
    .catch(function(){
     res.send("fail")
