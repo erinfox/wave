@@ -267,19 +267,19 @@ app.get('/wave_break', function(req, res){
 
 // ----entering in new wave_break spot-------//
 
-// app.post('/wave_break', function(req, res){
-//   break_location = req.body.break_location
-//   difficult_level = req.body.difficult_level
-//   rough_reef = req.body.rough_reef
+app.post('/wave_break', function(req, res){
+  break_location = req.body.break_location
+  difficult_level = req.body.difficult_level
+  rough_reef = req.body.rough_reef
 
-//   db
-//     .one ("INSERT INTO wave_break(break_location, difficult_level, rough_reef) VALUES($1, $2, $3) returning id",
-//       [break_location, difficult_level, rough_reef])
-//     .then (data =>{
-//       // console.log(data.id); //print new user id
-//       res.redirect('/wave_break/' + data.id)
-//     }); //.then
-// }); //app.post
+  db
+    .one ("INSERT INTO wave_break(break_location, difficult_level, rough_reef) VALUES($1, $2, $3) returning id",
+      [break_location, difficult_level, rough_reef])
+    .then (data =>{
+      // console.log(data.id); //print new user id
+      res.redirect('/wave_break/' + data.id)
+    }); //.then
+}); //app.post
 
 
 //*************** INDIVIDUAL WAVE_BREAK PAGE ****************//
