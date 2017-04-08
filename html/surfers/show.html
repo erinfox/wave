@@ -45,24 +45,19 @@
     <option value = '4'> Black Diamond Waves</option>
     <option value = '5'> You might die out there waves</option>
     </select>
-   <input type="hidden" value="{{#surfers}}{{id}}{{/surfers}}" name="surfer_id_again">
+   <input type="hidden" value="{{#surfers}}{{person_id}}{{/surfers}}" name="surfer_id_again">
 
 <button type="submit" class="btn">Update Skill Level</button>
 <br>
-<br>
 
-<label for="favorite_wave_break_id" class="favorite_wave_break_id"> Update Surf Location: </label>
-
-  <select name="favorite_break_id">
-  {{#waves}}
-    <option value="{{id}}">{{break_location}}</option>
-  {{/waves}}
-  </select>
-  <button type="submit" class="btn">Update Favorite Break </button>
 <br>
 {{/surfers}}
 
-<a href="/delete/{{ id }}"> Delete Account</a>
+
+
+ {{#surfers}}
+<a href="/delete/{{person_id}}"> Delete Account</a>
+{{/surfers}}
 
 <br>
 
