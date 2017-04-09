@@ -38,6 +38,10 @@ to do
 -make it pretty 
 -GET AN API 
 
+4/9 
+-GET API
+-MAKE PRETTY 
+
 
 
 

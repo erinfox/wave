@@ -5,7 +5,7 @@ let bodyParser = require("body-parser");
 let pgp = require("pg-promise")();
 let session = require('express-session');
 let methodOverride = require('method-override');
-let axios = require('axios');
+// let axios = require('axios');
 let config = require('./config');
 app.use(methodOverride('_method'));
 
@@ -145,10 +145,6 @@ app.get('/surfers/:id', function(req, res){
   db
     .one("SELECT surfers.id AS person_id, name, skill_level,board_type, favorite_break_id, email, wave_break.break_location  FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id WHERE surfers.id = $1",[id])
 
-    // .one('SELECT surfers.favorite_break_id, wave_break.break_location FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id = $1',[1])
-
-    // .one('SELECT surfers.favorite_break_id, surfers.name, wave_break.break_location FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id = $1',[1])
-
     .then(function(data){
       // console.log(data)
       let view_data = {
@@ -168,9 +164,6 @@ app.get('/surfers/:id', function(req, res){
 
 
 
-
-
-
 //*************** API CALL FOR EACH SURFER PROFILE ****************//
 
 // app.get('/api/:location_id', function(req, res){
@@ -180,15 +173,8 @@ app.get('/surfers/:id', function(req, res){
 //   db.one('SELECT * FROM wave_break WHERE id = $1', id)
 //   .then(function(data){
 
-//   let lat = 8.834;
-//   let long = 2.3394;
+//   let url =
 
-//   let url = "https://api.worldweatheronline.com/premium/v1/marine.ashx?q=" + lat +","+ long +"&key="+config.key+"&format=json";
-
-//     axios.get(url)
-//     .then(function(response){
-//       res.send(response.data.data.weather)
-//     })
 //     .catch(function(err){
 //       console.log(err);
 //     })
