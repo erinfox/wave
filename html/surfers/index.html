@@ -16,13 +16,39 @@
 </head>
 <body>
 
-<h3>THIS IS THE LIST OF SURFERS PAGE (index)</h3>
+<h3>TOP SURFERS</h3>
 
-
+<!--
 {{#surfers}}
 <a href="/surfers/{{ id }}">{{ name }} <br> </a>
 {{/surfers}}
 <br>
+ -->
+
+
+
+<table class = "u-full-width">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Skill Level</th>
+      <th>Board Type</th>
+      <th>Favorite Place to Surf</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {{#surfers}}
+      <td><a href="/surfers/{{ id }}">{{ name }}</a></td>
+      <td>{{skill_level}}</td>
+      <td>{{board_type}}</td>
+      <td>{{break_location}}</td>
+    </tr>
+      {{/surfers}}
+  </tbody>
+</table>
+
+
 
 <a href="/logout"> Logout </a>
 

@@ -59,6 +59,7 @@ video {
   vertical-align: baseline; /* 2 */
 }
 
+
 /**
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
@@ -283,7 +284,7 @@ select {
  * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
  *    and `video` controls.
  * 2. Correct inability to style clickable `input` types in iOS.
- * 3. Improve usability and consistency of cursor style between image-type
+ * 3. Improve usability and consistency of cursor style between ƒ-type
  *    `input` and others.
  */
 

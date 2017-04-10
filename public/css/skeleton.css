@@ -274,7 +274,7 @@ legend {
   margin-bottom: .5rem;
   font-weight: 600; }
 fieldset {
-  padding: 0;
+  padding: 20;
   border-width: 0; }
 input[type="checkbox"],
 input[type="radio"] {
