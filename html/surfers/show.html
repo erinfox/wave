@@ -10,8 +10,8 @@
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
 <!-- CSS -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/skeleton.css">
 
 </head>
 <body>
@@ -21,13 +21,13 @@
 <div class = "surfer">
 
     {{#surfers}}
-    <h1>{{ name }}
+    <h1>{{ name }}</h1>
     <br>
-    Skill Level: {{ skill_level }}
+    <h5>Skill Level: {{ skill_level }}</h5>
     <br>
-    Board Type: {{ board_type }}
+    <h5>Board Type: {{ board_type }}</h5>
     <br>
-    <h2 id = "favBreak"> Favorite Break: {{break_location}}</h2>
+    <h5 id = "favBreak"> Favorite Break: {{break_location}}</h5>
     {{/surfers}}
   </div>
 
@@ -40,7 +40,7 @@
     <form class="form-horizontal" action="/user/{{person_id}}?_method=PUT" method="POST">
     <input name ="board_type" type="text"  placeholder="I will be surfing on a...">
     <input type="hidden" value="{{#surfers}}{{person_id}}{{/surfers}}" name="changeSurferBoard">
-     <button type="submit" class="btn">Update Board</button>
+     <button type="submit" class="btn1">Update Board</button>
     </form>
 
 
@@ -55,11 +55,21 @@
     </select>
    <input type="hidden" value="{{#surfers}}{{person_id}}{{/surfers}}" name="surfer_id_again">
 
-<button type="submit" class="btn">Update Skill Level</button>
+<button type="submit" class="btn1">Update Skill Level</button>
 <br>
 
 <br>
 {{/surfers}}
+
+
+<div class="api">
+
+</div>
+
+
+
+
+
 
 
 
