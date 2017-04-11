@@ -10,19 +10,39 @@
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
 <!-- CSS -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/skeleton.css">
 
 </head>
 <body>
 
-<h3>Select a location to see the Surf Forecast</h3>
+<h3>Sea the Surf Forecast</h3>
 
-{{#wave_break}}
+<!-- {{#wave_break}}
 <a href="/wave_break/{{ id }}">{{ break_location }}</a>
 <br>
 {{/wave_break}}
- <br>
+ <br> -->
+
+
+<table class = "u-full-width">
+  <thead>
+    <tr>
+      <th>Surf Location</th>
+      <th>Difficulty Level</th>
+      <th>Rough Reef?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {{#wave_break}}
+      <td><a href="/wave_break/{{ id }}">{{ break_location }}</a></td>
+      <td>{{difficult_level}}</td>
+      <td>{{rough_reef}}</td>
+    </tr>
+      {{/wave_break}}
+  </tbody>
+</table>
 
 
 
@@ -30,7 +50,6 @@
 <form required action = '/wave_break' method = 'post'>
 <br>
 New Surf Spot: <input type = 'text' name = 'break_location'>
-<br>
 <br>
 Difficulty Level:
 <select  type 'integer' name = 'difficult_level'>
@@ -40,9 +59,6 @@ Difficulty Level:
 <option value = '4'> Black Diamond Waves</option>
 <option value = '5'> You might die out there waves</option>
 </select>
-
-
-<br>
 <br>
 
 Is the Reef Dangerous?:
@@ -56,8 +72,9 @@ Is the Reef Dangerous?:
 </form>
 
 
-<a href="/logout" style = "margin-right:10px; position:relative; float:right;"> Log Out</a>
-
+<div class = "one.columns">
+<a href ='/' style="margin-right:30px; position:relative; float:right; margin-top: -1000px;"> Log Out </a>
+</div>
 
 </body>
 </html>

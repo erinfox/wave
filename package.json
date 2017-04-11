@@ -18,6 +18,7 @@
     "method-override": "^2.3.8",
     "mustache": "^2.3.0",
     "mustache-express": "^1.2.4",
-    "pg-promise": "^5.6.4"
+    "pg-promise": "^5.6.4",
+    "request": "^2.81.0"
   }
 }

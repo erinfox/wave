@@ -6,6 +6,7 @@ let pgp = require("pg-promise")();
 let session = require('express-session');
 let methodOverride = require('method-override');
 // let axios = require('axios');
+// let request = require('request');
 let config = require('./config');
 app.use(methodOverride('_method'));
 
@@ -118,14 +119,15 @@ app.post('/sign_up', function(req, res){
 
 
 
-
+('SELECT surfers.id AS person_id, name, skill_level,board_type, favorite_break_id, email, wave_break.break_location, wave_break.image  FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id')
 
 
 //*************** SURFERS PAGE ****************//
 
 app.get('/surfers', function(req, res){
   db
-    .any("SELECT * FROM surfers")
+    // .any("SELECT * FROM surfers")
+    .any('SELECT surfers.id AS person_id, name, skill_level,board_type, favorite_break_id, email, wave_break.break_location, wave_break.image  FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id')
     .then(function(data){
       // console.log(data)
 
@@ -143,10 +145,10 @@ app.get('/surfers/:id', function(req, res){
   // console.log(req.params) //this is consoling the right id
 
   db
-    .one("SELECT surfers.id AS person_id, name, skill_level,board_type, favorite_break_id, email, wave_break.break_location  FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id WHERE surfers.id = $1",[id])
+    .one("SELECT surfers.id AS person_id, name, skill_level,board_type, favorite_break_id, email, wave_break.break_location, wave_break.image  FROM surfers INNER JOIN wave_break ON surfers.favorite_break_id = wave_break.id WHERE surfers.id = $1",[id])
 
     .then(function(data){
-      // console.log(data)
+      console.log(data)
       let view_data = {
         show:data,
         id:data.id,
@@ -156,7 +158,8 @@ app.get('/surfers/:id', function(req, res){
         favorite_break_id: data.favorite_break_id,
         email: data.email,
         password: data.password,
-        surfers: data
+        surfers: data,
+        image: data.image
       }//view_data
        res.render("surfers/show", view_data);
     });//.then

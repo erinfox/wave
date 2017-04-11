@@ -15,18 +15,25 @@
 
 </head>
 <body>
-<h3>THIS IS THE LIST OF WAVE_BREAKS PAGE (show)</h3>
+<h3>Popular Surf Spots</h3>
+<div class="api" style="margin-right: 100px; margin-top: 100px; position:relative; float:right;">API GOES HERE</div>
 
 
   <div class = "wave_break">
 
     {{#wave_break}}
     <h2>{{ break_location }} </h2>
+    <img src="{{image}}" style ="width:50%; height:auto;">
     {{/wave_break}}
   </div>
 
 
-<a href="/logout"> Logout </a>
+
+
+
+<div class = "one.columns">
+<a href ='/' style="margin-right:30px; position:relative; float:right; margin-top: -850px;"> Log Out </a>
+</div>
 
 
 </body>

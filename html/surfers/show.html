@@ -12,14 +12,17 @@
 <!-- CSS -->
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/skeleton.css">
+  <link rel="stylesheet" href="/css/main.css">
 
 </head>
 <body>
 
 
+<div class="api" style="margin-right: 100px; margin-top: 100px; position:relative; float:right;"></div>
+
+<img src="{{image}}" alt="">
 
 <div class = "surfer">
-
     {{#surfers}}
     <h1>{{ name }}</h1>
     <br>
@@ -27,15 +30,13 @@
     <br>
     <h5>Board Type: {{ board_type }}</h5>
     <br>
-    <h5 id = "favBreak"> Favorite Break: {{break_location}}</h5>
+    <h5 id = "favBreak" breakName="{{break_location}}"> Favorite Break: {{break_location}}</h5>
     {{/surfers}}
   </div>
 
-{{#surfers}}
-<!--   {{person_id}}
-  {{skill_level}}
-  {{break_location}} -->
 
+
+{{#surfers}}
 <p>Update Your Board: </p>
     <form class="form-horizontal" action="/user/{{person_id}}?_method=PUT" method="POST">
     <input name ="board_type" type="text"  placeholder="I will be surfing on a...">
@@ -57,20 +58,8 @@
 
 <button type="submit" class="btn1">Update Skill Level</button>
 <br>
-
 <br>
 {{/surfers}}
-
-
-<div class="api">
-
-</div>
-
-
-
-
-
-
 
 
  {{#surfers}}
@@ -79,7 +68,9 @@
 
 <br>
 
-<a href="/logout"> Logout </a>
+<div class = "one.columns">
+<a href ='/' style="margin-right:30px; position:relative; float:right; margin-top: -550px;"> Log Out </a>
+</div>
 
 <script src= "/js/jquery.js"> </script>
 <script src= "/js/script.js"> </script>

@@ -26,18 +26,20 @@
     </div>
   </div>
 
-<form class='Log In' action= '/login' method ='post'>
-{{#logged_in}}
+<form class='Log In' action= '/login' method ='post' style="margin-bottom:0px; position:relative; display:inline; padding: 0 auto;">
+<!-- {{#logged_in}}
 <h2>You are already logged in, {{email}}!</h2>
-{{/logged_in}}
+{{/logged_in}} -->
+
 
 
   <fieldset>
-    <label for='inputEmail' class='inputEmail'> Email: </label>
-    <input name="email" type="text" class="email" placeholder="">
+    <!-- <label for="inputEmail" class='inputEmail'></label> -->
 
-    <label for="inputPassword" class="inputPassword">Password</label>
-    <input name="password" type="password" placeholder="">
+    Email<input name="email" type="text" class="email" placeholder="">
+
+<!--     <label for="inputPassword" class="inputPassword"></label> -->
+    Password <input name="password" type="password" placeholder="">
 
 
     <button type="submit" class="btn">Log in</button>
@@ -48,7 +50,8 @@
 
 <br>
 <div id= "home_wave">
-  <img src="images/wave_1.jpg" style=" display:block; opacity: 0.7;margin: auto; width:100%; position: relative; ">
+  <img src="images/wave_1.jpg"
+  style=" display:block; opacity: 0.7; width:100%; position: relative; margin-top:-15%;">
 
 </div>
 
