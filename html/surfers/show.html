@@ -18,24 +18,21 @@
 <body>
 
 
-<div class="api" style="margin-right: 100px; margin-top: 100px; position:relative; float:right;"></div>
+<div class="api" style="margin-right: 90px;margin-left:5%; margin-top: 100px; position:relative; float:right;"></div>
 
-<img src="{{image}}" alt="">
 
-<div class = "surfer">
+<div class = "surfer" style= "margin-left: 5%; margin-top: 4%;">
     {{#surfers}}
     <h1>{{ name }}</h1>
-    <br>
     <h5>Skill Level: {{ skill_level }}</h5>
-    <br>
     <h5>Board Type: {{ board_type }}</h5>
-    <br>
     <h5 id = "favBreak" breakName="{{break_location}}"> Favorite Break: {{break_location}}</h5>
     {{/surfers}}
   </div>
 
-
-
+<br>
+<br>
+<div style="margin-left: 10%;">
 {{#surfers}}
 <p>Update Your Board: </p>
     <form class="form-horizontal" action="/user/{{person_id}}?_method=PUT" method="POST">
@@ -54,23 +51,29 @@
     <option value = '4'> Black Diamond Waves</option>
     <option value = '5'> You might die out there waves</option>
     </select>
-   <input type="hidden" value="{{#surfers}}{{person_id}}{{/surfers}}" name="surfer_id_again">
+     <input type="hidden" value="{{#surfers}}{{person_id}}{{/surfers}}" name="surfer_id_again">
 
 <button type="submit" class="btn1">Update Skill Level</button>
-<br>
-<br>
+
 {{/surfers}}
 
-
+<br>
  {{#surfers}}
 <a href="/delete/{{person_id}}"> Delete Account</a>
 {{/surfers}}
-
+</div>
 <br>
 
-<div class = "one.columns">
-<a href ='/' style="margin-right:30px; position:relative; float:right; margin-top: -550px;"> Log Out </a>
+<img src="{{image}}" style ="width:45%; height:auto; float:right; margin-top: -400px; margin-right: 6%;">
+
+
+<div class = "more waves">
+<a href ='/wave_break/{{id}}' style="float:right; margin-right:25%; "> Sea Other Tide Forecasts </a>
 </div>
+
+
+<a href ='/' style="margin-left:300px; position:relative; margin-top: -20px;margin-bottom: 20%;"> Log Out </a>
+
 
 <script src= "/js/jquery.js"> </script>
 <script src= "/js/script.js"> </script>
