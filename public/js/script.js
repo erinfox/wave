@@ -42,4 +42,11 @@ getBreakInfo();
 
 
 
+
 }); //ends doc.ready
+
+
+// $('#city').on('click', function() {
+//   getBreakInfo();
+//   console.log('clicked');
+// })

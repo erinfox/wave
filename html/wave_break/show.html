@@ -18,19 +18,13 @@
 <h3 style="text-align: center;margin-top: 2%;">Popular Surf Spots</h3>
 
 
-
-
 <div class="api" style="margin-right: 90px;margin-left:5%; margin-top: 100px; position:relative; float:right;"></div>
-
-
-
-
 
 
   <div class = "wave_break">
 
     {{#wave_break}}
-    <h2 style="margin-left:5%;">{{ break_location }} </h2>
+    <h2 id = "favBreak" breakName="{{break_location}}" style="margin-left:5%;">{{ break_location }} </h2>
     <img src="{{image}}" style ="width:50%; height:auto; margin-left: 5%;">
     {{/wave_break}}
   </div>
@@ -38,6 +32,8 @@
 
 
 
+
+<div class="api" style="margin-right: 90px;margin-left:5%; margin-top: 100px; position:relative; float:right;"></div>
 
 <div class = "one.columns">
 <a href ='/' style="margin-right:30px; position:relative; float:right; margin-top: -850px;"> Log Out </a>

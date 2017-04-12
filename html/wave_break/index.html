@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/skeleton.css">
 
+
 </head>
 <body>
 
@@ -23,6 +24,11 @@
 <br>
 {{/wave_break}}
  <br> -->
+
+<!-- <button type="submit" id="city"></button> -->
+
+
+
 
 
 <table class = "u-full-width" style="margin-left:4%;">
@@ -36,7 +42,7 @@
   <tbody>
     <tr>
       {{#wave_break}}
-      <td><a href="/wave_break/{{ id }}">{{ break_location }}</a></td>
+      <td ><a href="/wave_break/{{ id }}" id="city">{{ break_location }}</a></td>
       <td>{{difficult_level}}</td>
       <td>{{rough_reef}}</td>
     </tr>
@@ -76,5 +82,9 @@ Is the Reef Dangerous?:
 <a href ='/' style="margin-right:30px; position:relative; float:right; margin-top: -1000px;"> Log Out </a>
 </div>
 
+
+
+<script src= "/js/jquery.js"> </script>
+<!-- <script src= "/js/script.js"> </script> -->
 </body>
 </html>
