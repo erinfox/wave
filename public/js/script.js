@@ -7,7 +7,7 @@ let button = $('button');
 
 
 
-
+//attr is....
 var getBreakInfo = function(break_location){
   var breakName = $("#favBreak").attr('breakname');
   // console.log(breakName)
